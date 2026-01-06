@@ -94,6 +94,8 @@ struct ReverbParameters
 	float highfreqrtratio;
 };
 
+class EffectManager;
+
 class Effect {
 
 	Effect() = delete;
@@ -117,6 +119,8 @@ public:
 		PackWrap(this->packetDeleteEffect, SV::ControlPacketType::deleteEffect, sizeof(SV::DeleteEffectPacket));
 
 		PackGetStruct(&*this->packetDeleteEffect, SV::DeleteEffectPacket)->effect = reinterpret_cast<uint32_t>(this);
+
+		EffectManager::RegisterEffect(this);
 	}
 
 	virtual ~Effect();
