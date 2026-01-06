@@ -17,6 +17,14 @@
 
 class EffectManager {
 public: 
+    template<class ParametersType>
+    static Effect* CreateEffect(uint32_t number, int priority, const ParametersType& parameters) 
+    {
+        Effect* effect = new (std::nothrow) Effect(number, priority, parameters);
+        RegisterEffect(effect);
+        return effect;
+    }
+
     static void RegisterEffect(Effect* effect);
     static void UnregisterEffect(Effect* effect);
     static bool IsValidEffect(Effect* effect);
